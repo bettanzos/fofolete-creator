@@ -1,27 +1,23 @@
-console.log("vamo");
-
 const options = [
   { src: "imgs/IMG_2521.PNG", type: "eyes", offset: -35 },
+  { src: "imgs/IMG_2520.PNG", type: "eyes", offset: -35 },
+  { src: "imgs/IMG_2522.PNG", type: "eyes", offset: -35 },
+  { src: "imgs/IMG_2523.PNG", type: "eyes", offset: -35 },
+  { src: "imgs/IMG_2524.PNG", type: "eyes", offset: -35 },
   { src: "imgs/IMG_2510.PNG", type: "top", offset: -25 },
   { src: "imgs/IMG_2511.PNG", type: "top", offset: -25 },
   { src: "imgs/IMG_2512.PNG", type: "top", offset: -25 },
   { src: "imgs/IMG_2513.PNG", type: "top", offset: -25 },
   { src: "imgs/IMG_2514.PNG", type: "top", offset: -25 },
-  { src: "imgs/IMG_2515.PNG", type: "top", offset: -70 },
-  { src: "imgs/IMG_2516.PNG", type: "top", offset: -70 },
-  { src: "imgs/IMG_2517.PNG", type: "top", offset: -70 },
-  { src: "imgs/IMG_2518.PNG", type: "top", offset: -70 },
-  { src: "imgs/IMG_2519.PNG", type: "top", offset: -70 },
-  { src: "imgs/IMG_2520.PNG", type: "top", offset: -25 },
-  { src: "imgs/IMG_2522.PNG", type: "top", offset: -25 },
-  { src: "imgs/IMG_2523.PNG", type: "top", offset: -25 },
-  { src: "imgs/IMG_2524.PNG", type: "top", offset: -25 },
+  { src: "imgs/IMG_2515.PNG", type: "body", offset: -70 },
+  { src: "imgs/IMG_2516.PNG", type: "body", offset: -70 },
+  { src: "imgs/IMG_2517.PNG", type: "body", offset: -70 },
+  { src: "imgs/IMG_2518.PNG", type: "body", offset: -70 },
+  { src: "imgs/IMG_2519.PNG", type: "body", offset: -70 },
 ];
 
 const $canvas = document.querySelector(".canvas");
 const $options = document.querySelector(".options__list");
-
-$options.appendChild;
 
 options.forEach((o) => {
   const $li = document.createElement("li");
@@ -40,10 +36,10 @@ options.forEach((o) => {
   $button.addEventListener("click", () => {
     const $img = document.createElement("img");
 
-    $img.className = "layer";
+    $img.className = `layer layer-${o.type}`;
     $img.src = o.src;
 
-    $canvas.appendChild($img);
+    document.querySelector(`.layer-${o.type}`).replaceWith($img);
   });
 
   $li.appendChild($button);
