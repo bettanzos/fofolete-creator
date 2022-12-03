@@ -38,6 +38,8 @@ main {
 .options__list {
   display: flex;
   gap: 8px;
+  max-width: 100%;
+  flex-wrap: wrap;
 }
 
 .option {
