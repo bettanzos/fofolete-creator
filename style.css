@@ -7,6 +7,7 @@
 ul {
   list-style: none;
 }
+
 main {
   margin: 32px auto;
   max-width: 500px;
@@ -15,10 +16,11 @@ main {
   justify-content: center;
   flex-direction: column;
 }
+
 .canvas {
-  border: 1px solid;
   width: 300px;
   height: 300px;
+  position: relative;
 }
 
 .options {
@@ -29,4 +31,10 @@ main {
 
 .options__list {
   display: flex;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
