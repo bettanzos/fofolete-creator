@@ -8,6 +8,11 @@ ul {
   list-style: none;
 }
 
+button {
+  background: 0;
+  border: 0;
+}
+
 main {
   margin: 32px auto;
   max-width: 500px;
@@ -26,11 +31,42 @@ main {
 .options {
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 32px;
+  gap: 16px;
 }
 
 .options__list {
   display: flex;
+  gap: 8px;
+}
+
+.option {
+  background-position: 100px 100px;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.option__img {
+  position: absolute;
+}
+.option::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border-radius: 100%;
+  top: 0;
+  left: 0;
+  transition: background ease 0.2s;
+}
+
+.option:hover::after {
+  background: #ff00bc2e;
 }
 
 .layer {
