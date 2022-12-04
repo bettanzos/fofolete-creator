@@ -20,6 +20,7 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 20px;
 }
 
 .canvas {
@@ -30,7 +31,7 @@ main {
 }
 
 .canvas--selection {
-  animation: shake 0.2s ease-in-out 2;
+  animation: shake 0.4s ease;
 }
 
 .options {
@@ -81,6 +82,23 @@ main {
   top: 0;
   left: 0;
 }
+
+.canvas-container {
+  position: relative;
+}
+
+.canvas-shadow {
+  height: 10px;
+  width: 200px;
+  background: transparent;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  animation: shadow-shrink 2s ease-in-out infinite alternate-reverse;
+}
+
 @keyframes float {
   from {
     transform: translateY(0px);
@@ -89,14 +107,28 @@ main {
     transform: translateY(20px);
   }
 }
+
 @keyframes shake {
   0% {
     transform: rotate(0);
   }
-  50% {
-    transform: rotate(-20deg);
+  25% {
+    transform: rotate(-15deg);
   }
-  100% {
-    transform: rotate(20deg);
+  50% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes shadow-shrink {
+  from {
+    box-shadow: 2px 320px 28px 4px #00000047;
+  }
+
+  to {
+    box-shadow: 2px 320px 28px 11px #00000047;
   }
 }

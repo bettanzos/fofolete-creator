@@ -17,6 +17,7 @@ const options = [
 ];
 
 const $canvas = document.querySelector(".canvas");
+const $canvasAnimation = document.querySelector(".canvas-container__animation");
 const $options = document.querySelector(".options__list");
 
 options.forEach((o) => {
@@ -40,8 +41,13 @@ options.forEach((o) => {
     $img.src = o.src;
 
     document.querySelector(`.layer-${o.type}`).replaceWith($img);
+    $canvasAnimation.classList.add("canvas--selection");
   });
 
   $li.appendChild($button);
   $options.appendChild($li);
+});
+
+$canvasAnimation.addEventListener("animationend", () => {
+  $canvasAnimation.classList.remove("canvas--selection");
 });
