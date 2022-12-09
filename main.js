@@ -19,6 +19,17 @@ const options = [
 const $canvas = document.querySelector(".canvas");
 const $canvasAnimation = document.querySelector(".canvas-container__animation");
 const $options = document.querySelector(".options__list");
+const $random = document.querySelector(".button");
+
+const select = (option) => {
+  const $img = document.createElement("img");
+
+  $img.className = `layer layer-${option.type}`;
+  $img.src = option.src;
+
+  document.querySelector(`.layer-${option.type}`).replaceWith($img);
+  $canvasAnimation.classList.add("canvas--selection");
+};
 
 options.forEach((o) => {
   const $li = document.createElement("li");
@@ -35,13 +46,7 @@ options.forEach((o) => {
   $button.className = "option";
   $button.style.backgroundImage = `url(${o.src})`;
   $button.addEventListener("click", () => {
-    const $img = document.createElement("img");
-
-    $img.className = `layer layer-${o.type}`;
-    $img.src = o.src;
-
-    document.querySelector(`.layer-${o.type}`).replaceWith($img);
-    $canvasAnimation.classList.add("canvas--selection");
+    select(o);
   });
 
   $li.appendChild($button);
@@ -50,4 +55,18 @@ options.forEach((o) => {
 
 $canvasAnimation.addEventListener("animationend", () => {
   $canvasAnimation.classList.remove("canvas--selection");
+});
+
+$random.addEventListener("click", (e) => {
+  const eyesIndex = Math.round(Math.random() * 4);
+  const bodyIndex = Math.round(Math.random() * 4);
+  const topIndex = Math.round(Math.random() * 4);
+
+  const eyes = options.filter((o) => o.type === "eyes")[eyesIndex];
+  const body = options.filter((o) => o.type === "body")[bodyIndex];
+  const top = options.filter((o) => o.type === "top")[topIndex];
+
+  select(eyes);
+  select(top);
+  select(body);
 });
