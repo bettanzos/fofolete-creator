@@ -101,7 +101,7 @@ canvas {
 
 .canvas-shadow {
   height: 10px;
-  width: 200px;
+  width: 150px;
   background: transparent;
   border-radius: 50%;
   position: absolute;
