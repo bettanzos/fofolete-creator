@@ -16,10 +16,36 @@ const options = [
   { src: "imgs/IMG_2519.PNG", type: "body", offset: -70 },
 ];
 
-const $canvas = document.querySelector(".canvas");
-const $canvasAnimation = document.querySelector(".canvas-container__animation");
-const $options = document.querySelector(".options__list");
-const $random = document.querySelector(".button");
+const q = (query) => document.querySelector(query);
+
+const $canvas = q(".canvas");
+const $canvasAnimation = q(".canvas-container__animation");
+const $options = q(".options__list");
+const $random = q(".js-random");
+const $save = q(".js-save");
+
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+const dpr = window.devicePixelRatio || 1;
+
+const size = 300;
+
+canvas.width = size * dpr;
+canvas.height = size * dpr;
+canvas.style.width = `${size}px`;
+canvas.style.height = `${size}px`;
+ctx.scale(dpr, dpr);
+
+document.body.appendChild(canvas);
+
+const drawCanvas = () => {
+  ctx.clearRect(0, 0, 300, 300);
+  [...$canvas.children].forEach((el) => {
+    ctx.drawImage(el, 0, 0);
+  });
+
+  $save.href = canvas.toDataURL();
+};
 
 const select = (option) => {
   const $img = document.createElement("img");
@@ -27,8 +53,9 @@ const select = (option) => {
   $img.className = `layer layer-${option.type}`;
   $img.src = option.src;
 
-  document.querySelector(`.layer-${option.type}`).replaceWith($img);
+  q(`.layer-${option.type}`).replaceWith($img);
   $canvasAnimation.classList.add("canvas--selection");
+  drawCanvas();
 };
 
 options.forEach((o) => {
@@ -57,7 +84,7 @@ $canvasAnimation.addEventListener("animationend", () => {
   $canvasAnimation.classList.remove("canvas--selection");
 });
 
-$random.addEventListener("click", (e) => {
+$random.addEventListener("click", () => {
   const eyesIndex = Math.round(Math.random() * 4);
   const bodyIndex = Math.round(Math.random() * 4);
   const topIndex = Math.round(Math.random() * 4);
@@ -70,3 +97,5 @@ $random.addEventListener("click", (e) => {
   select(top);
   select(body);
 });
+
+window.addEventListener("load", drawCanvas);

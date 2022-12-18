@@ -10,19 +10,21 @@
   <body>
     <main>
       <div class="canvas-container">
-      <div class="canvas-container__animation">
-        <div class="canvas">
-          <img src="imgs/base.png" />
-          <img class="layer layer-eyes" src="imgs/IMG_2521.PNG" />
-          <img class="layer layer-body" src="imgs/IMG_2515.PNG" />
-          <img class="layer layer-top" src="imgs/IMG_2510.PNG" />
-        </div>
+        <div class="canvas-container__animation">
+          <div class="canvas">
+            <img class="layer-base" src="imgs/base.png" />
+            <img class="layer layer-eyes" src="imgs/IMG_2521.PNG" />
+            <img class="layer layer-body" src="imgs/IMG_2515.PNG" />
+            <img class="layer layer-top" src="imgs/IMG_2510.PNG" />
+          </div>
         </div>
         <div class="canvas-shadow"></div>
       </div>
       <div class="options">
         <ul class="options__list"></ul>
       </div>
+      <button class="button js-random">Randomizar</button>
+      <a class="button js-save" download="fofolete.png">Salvar</button>
     </main>
     <script src="main.js"></script>
   </body>
