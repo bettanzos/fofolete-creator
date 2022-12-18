@@ -1,15 +1,18 @@
+const defaultTop = { src: "imgs/IMG_2510.PNG", type: "top", offset: -25 };
+const defaultBody = { src: "imgs/IMG_2515.PNG", type: "body", offset: -70 };
+const defaultEyes = { src: "imgs/IMG_2521.PNG", type: "eyes", offset: -35 };
 const options = [
-  { src: "imgs/IMG_2521.PNG", type: "eyes", offset: -35 },
+  defaultEyes,
   { src: "imgs/IMG_2520.PNG", type: "eyes", offset: -35 },
   { src: "imgs/IMG_2522.PNG", type: "eyes", offset: -35 },
   { src: "imgs/IMG_2523.PNG", type: "eyes", offset: -35 },
   { src: "imgs/IMG_2524.PNG", type: "eyes", offset: -35 },
-  { src: "imgs/IMG_2510.PNG", type: "top", offset: -25 },
+  defaultTop,
   { src: "imgs/IMG_2511.PNG", type: "top", offset: -25 },
   { src: "imgs/IMG_2512.PNG", type: "top", offset: -25 },
   { src: "imgs/IMG_2513.PNG", type: "top", offset: -25 },
   { src: "imgs/IMG_2514.PNG", type: "top", offset: -25 },
-  { src: "imgs/IMG_2515.PNG", type: "body", offset: -70 },
+  defaultBody,
   { src: "imgs/IMG_2516.PNG", type: "body", offset: -70 },
   { src: "imgs/IMG_2517.PNG", type: "body", offset: -70 },
   { src: "imgs/IMG_2518.PNG", type: "body", offset: -70 },
@@ -29,6 +32,12 @@ const ctx = canvas.getContext("2d");
 const dpr = window.devicePixelRatio || 1;
 
 const size = 300;
+
+const selected = {
+  top: defaultTop,
+  body: defaultBody,
+  eyes: defaultEyes,
+};
 
 canvas.width = size * dpr;
 canvas.height = size * dpr;
@@ -55,7 +64,32 @@ const select = (option) => {
 
   q(`.layer-${option.type}`).replaceWith($img);
   $canvasAnimation.classList.add("canvas--selection");
+  selected[option.type] = option;
   drawCanvas();
+  updateHash();
+};
+
+const hash = (option) => option.src.slice(9, 13);
+
+const updateHash = () => {
+  location.hash = `${hash(selected.top)}${hash(selected.body)}${hash(
+    selected.eyes
+  )}`;
+};
+
+const decodeHash = () => {
+  if (location.hash.length !== 13) return;
+
+  const hash = location.hash.slice(1);
+
+  const get = (start, end) => {
+    const option = options.find((o) => o.src.includes(hash.slice(start, end)));
+    if (option) select(option);
+  };
+
+  get(0, 4);
+  get(4, 8);
+  get(8, 12);
 };
 
 options.forEach((o) => {
@@ -98,4 +132,7 @@ $random.addEventListener("click", () => {
   select(body);
 });
 
-window.addEventListener("load", drawCanvas);
+window.addEventListener("load", () => {
+  decodeHash();
+  drawCanvas();
+});
